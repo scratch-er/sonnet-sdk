@@ -1,0 +1,3 @@
+[submodule "modules/compiler-rt"]
+	path = modules/compiler-rt
+	url = https://gitlink.org.cn/foobat/compiler-rt.git
