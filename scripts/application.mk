@@ -1,6 +1,6 @@
 APP_BUILD_DIR ?= build
 
-CFLAGS += --sysroot=$(SYSROOT) -isystem $(SYSROOT)/include -isystem $(SONNET_SDK_PATH)/include -std=c23
+CFLAGS += -isystem $(SONNET_SDK_PATH)/include -std=c23
 
 APP_OBJS := $(patsubst %.c,$(APP_BUILD_DIR)/objs/%.o,$(APP_SRCS))
 APP_OBJS := $(patsubst %.s,$(APP_BUILD_DIR)/objs/%.o,$(APP_OBJS))
@@ -14,7 +14,7 @@ clean:
 
 # Process module support
 $(foreach module,$(MODULES),$(eval include $(module)/module.mk))
-CFLAGS += $(foreach dir,$(MODULE_INCLUDE_DIRS),-system $(dir))
+CFLAGS += $(foreach dir,$(MODULE_INCLUDE_DIRS),-isystem $(dir))
 
 # Rule for C sources
 $(APP_BUILD_DIR)/objs/%.o: %.c
