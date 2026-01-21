@@ -23,6 +23,11 @@ void bsp_init (void) {
     uart_config_baudrate(SYSUART, 115200, SYS_FREQ_HZ);
 }
 
+char getch(void) {
+    while (!uart_check_rx(SYSUART));
+    return uart_read(SYSUART);
+}
+
 void putch(char ch) {
     uart_write(SYSUART, ch);
 }

@@ -2,8 +2,16 @@
 #include <periph/retrosoc_sysuart.h>
 #include <stdint.h>
 
+static uint16_t _uart_buff = (uint16_t)(-1);
+
 uint16_t uart_read(void *uart_periph) {
-    return retrosoc_sysuart_read((retrosoc_sysuart_map_t*)uart_periph);
+    if (_uart_buff != (uint16_t)(-1)) {
+        uint16_t data = _uart_buff;
+        _uart_buff = (uint16_t)(-1);
+        return data;
+    } else {
+        return retrosoc_sysuart_read((retrosoc_sysuart_map_t*)uart_periph);
+    }
 }
 
 void uart_write(void *uart_periph, uint16_t data) {
@@ -15,7 +23,12 @@ void uart_config_baudrate(void *uart_periph, uint32_t baudrate, uint32_t periph_
 }
 
 bool uart_check_rx(void *uart_periph) {
-    return retrosoc_sysuart_read((retrosoc_sysuart_map_t*)uart_periph) != (uint32_t)(-1);
+    if (_uart_buff == (uint16_t)(-1)) {
+        _uart_buff = retrosoc_sysuart_read((retrosoc_sysuart_map_t*)uart_periph);
+        return _uart_buff != (uint16_t)(-1);
+    } else {
+        return true;
+    }
 }
 
 bool uart_check_tx(void *uart_periph) {
