@@ -35,9 +35,16 @@ $(APP_BUILD_DIR)/crt0.o: $(BSP_PATH)/crt0.s
 %.bin:%.elf
 	$(OBJCOPY) -O binary --only-section .text $< $@
 
+# Rule for generating `compile_commands.json`
+compile_commands: $(APP_BUILD_DIR)/compile_commands.json
+
+$(APP_BUILD_DIR)/compile_commands.json:
+	@mkdir -p $(dir $@)
+	python3 $(SONNET_SDK_PATH)/scripts/compile-commands.py $(CC) $(APP_BUILD_DIR) $(CFLAGS) -- $(APP_SRCS)
+
 # Rule for building the application elf
 $(APP_BUILD_DIR)/application.elf: $(APP_BUILD_DIR)/crt0.o $(APP_OBJS) $(MODULE_LIBS)
 	$(MAKE) -C $(BSP_PATH) BSP_BUILD_DIR=$(BSP_BUILD_DIR) TOOLCHAIN_FILE=$(abspath $(TOOLCHAIN_FILE))
 	$(LD) $(LDFLAGS) -T $(BSP_PATH)/linker.ld $(APP_BUILD_DIR)/crt0.o $(APP_OBJS) $(APP_BUILD_DIR)/bsp/libbsp.a $(MODULE_LIBS) -o $@
 
-.PHONY: all clean clean_config clean_all example
+.PHONY: all clean clean_config clean_all compile_commands $(APP_BUILD_DIR)/compile_commands.json
