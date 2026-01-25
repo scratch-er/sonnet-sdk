@@ -8,11 +8,6 @@ void retrosoc_sysuart_write(volatile retrosoc_sysuart_map_t *uart_periph, uint32
     uart_periph->data = data;
 }
 
-void retrosoc_sysuart_config_baudrate(volatile retrosoc_sysuart_map_t *uart_periph, uint32_t baudrate, uint32_t periph_freq) {
-    uart_periph->clkdiv = periph_freq / baudrate;
-}
-
-bool retrosoc_sysuart_check_rx(volatile retrosoc_sysuart_map_t *uart_periph) {
-    uint32_t data = uart_periph->data;
-    return data != 0xffffffff;
+void retrosoc_sysuart_config_baudrate(volatile retrosoc_sysuart_map_t *uart_periph, uint32_t baudrate_hz, uint32_t periph_freq) {
+    uart_periph->clkdiv = periph_freq / baudrate_hz;
 }

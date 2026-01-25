@@ -10,8 +10,12 @@ void uart_write(void *uart_periph, uint16_t data) {
     simple_uart_write((simple_uart_map_t*)uart_periph, data);
 }
 
-void uart_config_baudrate(void *uart_periph, uint32_t baudrate, uint32_t periph_freq) {
-    return;
+void uart_config(void *uart_periph, uart_config_t *config) {
+    config->baudrate_hz = 0;
+    config->word_length = 8;
+    config->patity = false;
+    config->stop_bits = 0;
+    config->flow_control = false;
 }
 
 bool uart_check_rx(void *uart_periph) {

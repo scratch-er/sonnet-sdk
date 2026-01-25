@@ -12,7 +12,7 @@ uint32_t retrosoc_sysuart_read(volatile retrosoc_sysuart_map_t *uart_periph);
 
 void retrosoc_sysuart_write(volatile retrosoc_sysuart_map_t *uart_periph, uint32_t data);
 
-void retrosoc_sysuart_config_baudrate(volatile retrosoc_sysuart_map_t *uart_periph, uint32_t baudrate, uint32_t periph_freq);
+void retrosoc_sysuart_config_baudrate(volatile retrosoc_sysuart_map_t *uart_periph, uint32_t baudrate, uint32_t periph_freq_hz);
 
 bool retrosoc_sysuart_check_rx(volatile retrosoc_sysuart_map_t *uart_periph);
 

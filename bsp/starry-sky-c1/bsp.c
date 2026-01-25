@@ -3,6 +3,7 @@
 #include <bsp/time.h>
 #include <hal/uart.h>
 #include <soc/retrosoc.h>
+#include <periph/retrosoc_sysuart.h>
 #include <stdint.h>
 
 extern uint32_t _sidata;
@@ -20,7 +21,7 @@ const area_t heap = {
 };
 
 void bsp_init (void) {
-    uart_config_baudrate(SYSUART, 115200, SYS_FREQ_HZ);
+    retrosoc_sysuart_config_baudrate(SYSUART, 115200, SYS_FREQ_HZ);
 }
 
 char getch(void) {
@@ -42,4 +43,28 @@ uint64_t uptime_us(void) {
     }
     lower_old = lower;
     return (((uint64_t)(higher)<<32) | lower) / SYS_FREQ_MHZ;
+}
+
+uint64_t cycle_count(void) {
+    static uint32_t higher = 0;
+    static uint32_t lower_old = 0;
+    uint32_t lower;
+    __asm__ volatile ("rdcycle %0" : "=r"(lower));
+    if (lower < lower_old) {
+        higher += 1;
+    }
+    lower_old = lower;
+    return ((uint64_t)(higher)<<32) | lower;
+}
+
+uint64_t instr_count(void) {
+    static uint32_t higher = 0;
+    static uint32_t lower_old = 0;
+    uint32_t lower;
+    __asm__ volatile ("rdinstret %0" : "=r"(lower));
+    if (lower < lower_old) {
+        higher += 1;
+    }
+    lower_old = lower;
+    return ((uint64_t)(higher)<<32) | lower;
 }

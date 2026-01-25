@@ -1,7 +1,7 @@
-BSP_SRCS += uart.c
 BSP_SRCS += bsp.c
 
-SDK_SRCS += src/periph/simple_uart.c
+SDK_SRCS += src/hal/nemu/uart.c
+SDK_SRCS += src/periph/uart/simple_uart.c
 
 TOOLCHAIN_FILE ?= ../../scripts/toolchains/rv32im-clang.mk
 BSP_BUILD_DIR ?= build

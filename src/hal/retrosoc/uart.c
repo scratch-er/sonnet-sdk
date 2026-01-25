@@ -1,5 +1,6 @@
 #include <hal/uart.h>
 #include <periph/retrosoc_sysuart.h>
+#include <soc/retrosoc.h>
 #include <stdint.h>
 
 static uint16_t _uart_buff = (uint16_t)(-1);
@@ -18,8 +19,12 @@ void uart_write(void *uart_periph, uint16_t data) {
     retrosoc_sysuart_write((volatile retrosoc_sysuart_map_t*)uart_periph, data);
 }
 
-void uart_config_baudrate(void *uart_periph, uint32_t baudrate, uint32_t periph_freq) {
-    retrosoc_sysuart_config_baudrate((volatile retrosoc_sysuart_map_t*)uart_periph, baudrate, periph_freq);
+void uart_config(void *uart_periph, uart_config_t *config) {
+    retrosoc_sysuart_config_baudrate((volatile retrosoc_sysuart_map_t*)uart_periph, config->baudrate_hz, SYS_FREQ_HZ);
+    config->word_length = 8;
+    config->patity = false;
+    config->stop_bits = 1;
+    config->flow_control = false;
 }
 
 bool uart_check_rx(void *uart_periph) {
