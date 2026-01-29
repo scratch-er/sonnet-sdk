@@ -16,11 +16,11 @@ uint16_t uart_read(void *uart_periph) {
 }
 
 void uart_write(void *uart_periph, uint16_t data) {
-    retrosoc_sysuart_write((volatile retrosoc_sysuart_map_t*)uart_periph, data);
+    retrosoc_sysuart_write((retrosoc_sysuart_map_t*)uart_periph, data);
 }
 
 void uart_config(void *uart_periph, uart_config_t *config) {
-    retrosoc_sysuart_config_baudrate((volatile retrosoc_sysuart_map_t*)uart_periph, config->baudrate_hz, SYS_FREQ_HZ);
+    retrosoc_sysuart_config_baudrate((retrosoc_sysuart_map_t*)uart_periph, config->baudrate_hz, SYS_FREQ_HZ);
     config->word_length = 8;
     config->patity = false;
     config->stop_bits = 1;
