@@ -1,5 +1,7 @@
 BSP_SRCS += bsp.c
 
+SDK_SRCS += src/aal/rv32i/context.c
+SDK_SRCS += src/aal/rv32i/context_asm.s
 SDK_SRCS += src/hal/retrosoc/gpio.c
 SDK_SRCS += src/hal/retrosoc/uart.c
 SDK_SRCS += src/periph/gpio/retrosoc_gpio.c
