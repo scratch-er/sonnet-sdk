@@ -4,3 +4,6 @@
 [submodule "modules/lightio"]
 	path = modules/lightio
 	url = ../lightio.git
+[submodule "modules/sonnet-libc"]
+	path = modules/sonnet-libc
+	url = ../sonnet-libc.git
