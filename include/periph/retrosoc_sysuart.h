@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     volatile uint32_t clkdiv __attribute__((__aligned__(4)));
     volatile uint32_t data __attribute__((__aligned__(4)));
@@ -13,5 +17,9 @@ uint32_t retrosoc_sysuart_read(retrosoc_sysuart_map_t *uart_periph);
 void retrosoc_sysuart_write(retrosoc_sysuart_map_t *uart_periph, uint32_t data);
 
 void retrosoc_sysuart_config_baudrate(retrosoc_sysuart_map_t *uart_periph, uint32_t baudrate, uint32_t periph_freq_hz);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __PERIPH_RETROSOC_SYSUART_H

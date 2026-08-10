@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 #if __riscv_xlen == 32
 typedef struct __attribute__((__packed__)) {
     uint32_t pc  __attribute__((__aligned__(4)));
@@ -45,5 +49,9 @@ void* get_stack_pointer(void);
 context_t* create_context(void* (*entry)(void*), void (*exit)(void*), void* stack_pointer, void* arg);
 
 void switch_to_context(context_t* context, context_t** save);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __AAL_CONTEXT_H

@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     volatile uint64_t mtime __attribute__((__aligned__(8)));
     volatile uint64_t mtimecmp __attribute__((__aligned__(8)));
@@ -16,5 +20,9 @@ typedef struct {
 } __attribute__((__packed__)) riscv32_mtime_map_t;
 
 typedef riscv64_mtime_map_t riscv_mtime_map_t;
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __PERIPH_RISCV_MTIME_H

@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Note:
  * 
  * Althoght `uptime_us()` and `cycle_count()` are both time related functions,
@@ -56,5 +60,9 @@ uint64_t instr_count(void);
  * @note Do not use this in an RTOS.
  */
 void spin_delay(uint32_t us);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __BSP_TIME_H */

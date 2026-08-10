@@ -8,6 +8,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     bool output;    /**< Configure pin as output when true, input when false */
     bool pullup;    /**< Enable internal pull-up resistor */
@@ -50,5 +54,9 @@ bool gpio_read(void* gpio_bank, uint8_t gpio_pin);
  * @param value true to set the pin high, false to set the pin low
  */
 void gpio_write(void* gpio_bank, uint8_t gpio_pin, bool value);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __HAL_GPIO_H

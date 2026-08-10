@@ -3,6 +3,9 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /* Note: do not mix direct use of functions in this header with stdio functions,
  * as stdio functions can have buffering
@@ -28,5 +31,9 @@ void putch(char ch);
  * @note If the system has no console, this should block forever.
  */
 char getch(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

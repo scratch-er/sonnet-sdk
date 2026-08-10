@@ -4,6 +4,10 @@
 #include <stdint.h>
 #include <aal/context.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     enum {
         EVENT_NULL = 0,
@@ -48,6 +52,10 @@ typedef enum : uintptr_t {
     EXCEPTION_SOFTWARE_CHECK                  = 18,
     EXCEPTION_HARDWARE_ERROR                  = 19,
 } mcause_t;
+#endif
+
+#ifdef __cplusplus
+}
 #endif
 
 #endif // __AAL_EVENT_H

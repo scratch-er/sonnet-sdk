@@ -8,6 +8,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 typedef struct {
     uint32_t baudrate_hz;  /**> Baudrate in Hz */
     uint8_t  word_length;  /**> Number of bis per frame */
@@ -57,5 +61,9 @@ bool uart_check_rx(void *uart_periph);
  * @return true if transmitter is ready, false otherwise
  */
 bool uart_check_tx(void *uart_periph);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // __HAL_UART_H

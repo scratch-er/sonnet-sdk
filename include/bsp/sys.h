@@ -1,6 +1,10 @@
 #ifndef __BSP_SYS_H
 #define __BSP_SYS_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Heap */
 
 /**
@@ -51,5 +55,9 @@ void halt(int code);
  */
 __attribute__((__noreturn__))
 void reset(int code);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __BSP_SYS_H */
