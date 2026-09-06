@@ -24,7 +24,11 @@ context_t* __event_handler_wrapper(context_t* context, uintptr_t mcause, uintptr
             case EXCEPTION_M_ECALL:
             case EXCEPTION_S_ECALL:
             case EXCEPTION_U_ECALL:
+            #ifdef __riscv_e
+                if (context->a5 == -1) {
+            #else
                 if (context->a7 == -1) {
+            #endif
                     event.event = EVENT_YIELD;
                 } else {
                     event.event = EVENT_SYSCALL;

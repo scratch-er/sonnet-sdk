@@ -10,8 +10,10 @@ CFLAGS += --sysroot=$(SYSROOT) -isystem $(SYSROOT)/include -isystem $(SONNET_SDK
 
 BSP_OBJS := $(patsubst %.c,$(BSP_BUILD_DIR)/bsp-objs/%.o,$(BSP_SRCS))
 BSP_OBJS := $(patsubst %.s,$(BSP_BUILD_DIR)/bsp-objs/%.o,$(BSP_OBJS))
+BSP_OBJS := $(patsubst %.S,$(BSP_BUILD_DIR)/bsp-objs/%.o,$(BSP_OBJS))
 SDK_OBJS := $(patsubst %.c,$(BSP_BUILD_DIR)/sdk-objs/%.o,$(SDK_SRCS))
 SDK_OBJS := $(patsubst %.s,$(BSP_BUILD_DIR)/sdk-objs/%.o,$(SDK_OBJS))
+SDK_OBJS := $(patsubst %.S,$(BSP_BUILD_DIR)/sdk-objs/%.o,$(SDK_OBJS))
 
 all: $(BSP_BUILD_DIR)/libbsp.a
 
@@ -26,11 +28,19 @@ $(BSP_BUILD_DIR)/bsp-objs/%.o: %.s
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
+$(BSP_BUILD_DIR)/bsp-objs/%.o: %.S
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
 $(BSP_BUILD_DIR)/sdk-objs/%.o: $(SONNET_SDK_PATH)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BSP_BUILD_DIR)/sdk-objs/%.o: $(SONNET_SDK_PATH)/%.s
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+$(BSP_BUILD_DIR)/sdk-objs/%.o: $(SONNET_SDK_PATH)/%.S
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
