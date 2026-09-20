@@ -53,7 +53,7 @@ $(APP_BUILD_DIR)/crt0.o: $(BSP_PATH)/crt0.s
 
 # Rule for converting elf into bin
 %.bin:%.elf
-	$(OBJCOPY) -O binary --only-section .text $< $@
+	$(OBJCOPY) -O binary $< $@
 
 # Rule for generating `compile_commands.json`
 compile_commands: $(APP_BUILD_DIR)/compile_commands.json
