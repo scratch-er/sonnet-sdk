@@ -6,6 +6,7 @@ SDK_SRCS += src/aal/riscv/event.c
 SDK_SRCS += src/aal/riscv/event_asm.S
 SDK_SRCS += src/hal/simplesoc/gpio.c
 SDK_SRCS += src/hal/simplesoc/uart.c
+SDK_SRCS += src/hal/simplesoc/timer.c
 SDK_SRCS += src/periph/gpio/simplesoc_gpio.c
 SDK_SRCS += src/periph/uart/simplesoc_uart.c
 

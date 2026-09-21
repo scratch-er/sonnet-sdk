@@ -1,8 +1,9 @@
 #ifndef __SOC_SIMPLESOC_H
 #define __SOC_SIMPLESOC_H
 
-#include <periph/simplesoc_gpio.h>
 #include <periph/simplesoc_uart.h>
+#include <periph/simplesoc_gpio.h>
+#include <periph/simplesoc_timer.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -21,10 +22,12 @@ extern "C" {
 #define SIMPLESOC_UART_BAUD 115200UL
 #endif
 
-#define UART0 ((simplesoc_uart_map_t*)0x10000000)
-#define UART1 ((simplesoc_uart_map_t*)0x10001000)
-#define GPIO0 ((simplesoc_gpio_map_t*)0x10002000)
-#define GPIO1 ((simplesoc_gpio_map_t*)0x10003000)
+#define UART0  ((simplesoc_uart_map_t*)  0x10000000)
+#define UART1  ((simplesoc_uart_map_t*)  0x10001000)
+#define GPIO0  ((simplesoc_gpio_map_t*)  0x10002000)
+#define GPIO1  ((simplesoc_gpio_map_t*)  0x10003000)
+#define TIMER0 ((simplesoc_timer_map_t*) 0x10004000)
+#define TIMER1 ((simplesoc_timer_map_t*) 0x10005000)
 
 #ifdef __cplusplus
 }
