@@ -2,7 +2,7 @@
 .global _start
 
 _start:
-    la sp, _stack_top
+    la sp, _stack_pointer
 
     # zero-init bss section
     # (.data and .text are loaded into initialized RAM by the FPGA bitstream)

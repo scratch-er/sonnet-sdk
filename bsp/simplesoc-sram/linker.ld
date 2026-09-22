@@ -29,7 +29,7 @@ SECTIONS {
         . = ALIGN(4);
         _edata = .;
     } >RAM
-    .bss :
+    .bss (NOLOAD) :
     {
         . = ALIGN(4);
         _sbss = .;
@@ -41,17 +41,19 @@ SECTIONS {
         . = ALIGN(4);
         _ebss = .;
     } >RAM
-    .heap :
+    .heap (NOLOAD) :
     {
-        . = ALIGN(4);
         _heap_start = .;
+        . = ORIGIN(RAM) + LENGTH(RAM) - 4K;
+        . = ALIGN(4);
+        _heap_end = .;
     } >RAM
     .stack (NOLOAD) :
     {
+        _stack_top = .;
         . = ALIGN(4);
         . = . + 4K;
         . = ALIGN(4);
-        _heap_end = .;
-        _stack_top = .;
+        _stack_pointer = .;
     } >RAM
 }

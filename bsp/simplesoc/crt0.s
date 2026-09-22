@@ -2,7 +2,7 @@
 .global _start
 
 _start:
-    la sp, _stack_top
+    la sp, _stack_pointer
 
     # copy data section from ROM to RAM
     la a0, _sidata
